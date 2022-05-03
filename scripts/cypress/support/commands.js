@@ -177,7 +177,7 @@ Cypress.Commands.add("openTableTab", (tn, rc) => {
 
     // wait for page rendering to complete
     if (rc != 0) {
-        cy.get(".nc-grid-row").should("have.length", rc);
+        cy.get(".nc-grid-row", {timeout: 10000}).should("have.length", rc);
     }
 
     cy.snip(`GridView_${tn}`);
