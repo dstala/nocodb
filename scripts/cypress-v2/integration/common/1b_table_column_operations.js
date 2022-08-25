@@ -9,14 +9,21 @@ export const genTest = (apiType, dbType) => {
 
     function addNewRow(index, cellValue) {
         cy.get(".nc-add-new-row-btn:visible").should("exist");
-        cy.get(".nc-add-new-row-btn").click({ force: true });
-        cy.get("#data-table-form-Title > input").first().type(cellValue);
-        cy.getActiveModal()
+        cy.get(".nc-add-new-row-btn").click();
+        // cy.get("#data-table-form-Title > input").first().type(cellValue);
+        cy.get(".nc-expand-col-Title").find(".nc-cell > input")
+            .should("exist")
+            .first()
+            .clear()
+            .type(cellValue);
+
+        cy.getActiveDrawer()
             .find("button")
             .contains("Save row")
             .click({ force: true });
 
         cy.toastWait("updated successfully");
+        cy.get("body").type("{esc}");
         mainPage.getCell("Title", index).contains(cellValue).should("exist");
     }
 
@@ -110,7 +117,7 @@ export const genTest = (apiType, dbType) => {
                 .clear()
                 .type(updatedRandVal);
 
-            cy.getActiveModal()
+            cy.getActiveDrawer()
                 .find("button")
                 .contains("Save row")
                 .click({ force: true });
@@ -134,7 +141,7 @@ export const genTest = (apiType, dbType) => {
 
             // delete row
             cy.getActiveMenu()
-                .find('.ant-dropdown-menu-item:contains("Delete row")')
+                .find('.ant-dropdown-menu-item:contains("Delete Row")')
                 .first()
                 .click({ force: true });
             cy.get("td").contains(randVal).should("not.exist");
@@ -155,7 +162,7 @@ export const genTest = (apiType, dbType) => {
             // delete selected rows
             mainPage.getCell("Title", 3).rightclick({ force: true });
             cy.getActiveMenu()
-                .contains("Delete all selected rows")
+                .contains("Delete Selected Rows")
                 .click({ force: true });
 
             // verify if everything is wiped off
