@@ -67,7 +67,8 @@
     "reachOut": "Reach out here",
     "betaNote": "This feature is currently in beta.",
     "moreInfo": "More information can be found here",
-    "logs": "Logs"
+    "logs": "Logs",
+    "test": "시험"
   },
   "objects": {
     "project": "프로젝트",
@@ -246,7 +247,7 @@
       "columnName": "편집 - 열 이름"
     },
     "community": {
-      "starUs1": "",
+      "starUs1": "Star",
       "starUs2": "Github",
       "bookDemo": "무료 데모 예약",
       "getAnswered": "디스코드",
